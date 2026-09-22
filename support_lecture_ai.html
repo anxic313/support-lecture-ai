@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Lecture AI — Help Keep the Project Alive</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <!-- ═══════════════════════════════════════════
+         SEO Meta Tags
+    ════════════════════════════════════════════ -->
+    <meta name="description" content="Support Lecture AI — the free, independently developed AI lecture tool by Anxic. Donate via crypto (BTC, USDT, SOL) or local payment methods (PromptPay, WavePay) to help keep the project alive and free for everyone.">
+    <meta name="keywords" content="Lecture AI, support Lecture AI, donate Lecture AI, Anxic, AI lecture tool, AI education, crypto donation, BTC, USDT, SOL, PromptPay, WavePay, free AI tool">
+    <meta name="author" content="Anxic">
+    <meta name="robots" content="index, follow">
+
+    <!-- ═══════════════════════════════════════════
+         Open Graph (Facebook, Discord, etc.)
+    ════════════════════════════════════════════ -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Support Lecture AI — Help Keep the Project Alive">
+    <meta property="og:description" content="Lecture AI is completely free and independently developed by Anxic. Support the developer via crypto (BTC, USDT, SOL) or local payment methods (PromptPay, WavePay). Every contribution is appreciated.">
+    <meta property="og:site_name" content="Lecture AI">
+    <meta property="og:locale" content="en_US">
+
+    <!-- ═══════════════════════════════════════════
+         Twitter / X Card
+    ════════════════════════════════════════════ -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Support Lecture AI — Help Keep the Project Alive">
+    <meta name="twitter:description" content="Lecture AI is a free AI-powered lecture tool by Anxic. Support the project via BTC, USDT, SOL, PromptPay, or WavePay. Always optional, always appreciated.">
+    <meta name="twitter:creator" content="@Anxic">
+    
+    <!-- Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons: Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        glass: {
+                            border: 'rgba(255, 255, 255, 0.12)',
+                            bg: 'rgba(25, 25, 35, 0.4)',
+                            bgHover: 'rgba(35, 35, 50, 0.5)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Ambient Background Glows */
+        .ambient-light {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        
+        .light-1 {
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(139,92,246,0.25) 0%, rgba(0,0,0,0) 70%);
+        }
+
+        .light-2 {
+            bottom: -15%;
+            right: -5%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(59,130,246,0.2) 0%, rgba(0,0,0,0) 70%);
+        }
+
+        /* macOS 3D Glass Card Effect */
+        .glass-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 
+                0 4px 24px -1px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 20px 40px -5px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* Glass Button */
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s ease;
+        }
+        
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-btn:active {
+            transform: scale(0.96);
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Utility for hiding input used for copying */
+        .copy-dummy {
+            position: absolute;
+            left: -9999px;
+        }
+    </style>
+</head>
+<body class="relative overflow-x-hidden text-slate-200">
+
+    <!-- Ambient Background Lights -->
+    <div class="ambient-light light-1"></div>
+    <div class="ambient-light light-2"></div>
+
+    <main class="flex-grow flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        
+        <!-- Header Section -->
+        <div class="max-w-3xl text-center mb-16">
+            <div class="inline-flex items-center justify-center p-3 mb-6 rounded-2xl glass-card text-violet-400">
+                <i class="ph ph-sparkle text-3xl"></i>
+            </div>
+            <h1 class="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400">
+                Support Lecture AI
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-400 font-light leading-relaxed max-w-2xl mx-auto">
+                Lecture AI is completely free and independently developed by Anxic. Support the developer to help keep the project alive. It is completely optional, always appreciated, and never required.
+            </p>
+        </div>
+
+        <!-- Support Options Grid -->
+        <!-- Note: items-start prevents cards from stretching vertically when one expands -->
+        <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+            
+            <!-- 1. Thailand: PromptPay -->
+            <div class="glass-card flex flex-col p-6 group card-hover-effect">
+                <div class="content-layer h-full flex flex-col">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                                <i class="ph ph-scan text-2xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-medium text-white">Promptpay</h2>
+                                <p class="text-sm text-slate-400">Thailand</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <button onclick="toggleQR('qr-promptpay', this)" class="w-full glass-btn py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white flex items-center justify-center gap-2 outline-none">
+                            <i class="ph ph-qr-code text-lg"></i> <span class="btn-text">Show QR</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Hidden QR Section -->
+                    <div id="qr-promptpay" class="hidden flex-col items-center justify-center pt-6 pb-2 transition-all duration-300">
+                        <div class="p-3 bg-white rounded-2xl shadow-xl">
+                            <!-- Placeholder for QR Code -->
+                            <img src="Promptpay.jpg" alt="Promptpay QR Code" class="w-56 h-56 rounded-lg object-contain">
+                        </div>
+                        <div class="text-center mt-4 text-xs text-slate-400">Scan to support via PromptPay</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Myanmar: WavePay -->
+            <div class="glass-card flex flex-col p-6 group card-hover-effect">
+                <div class="content-layer h-full flex flex-col">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+                                <i class="ph ph-qr-code text-2xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-medium text-white">Wavepay</h2>
+                                <p class="text-sm text-slate-400">Myanmar</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <button onclick="toggleQR('qr-wavepay', this)" class="w-full glass-btn py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white flex items-center justify-center gap-2 outline-none">
+                            <i class="ph ph-qr-code text-lg"></i> <span class="btn-text">Show QR</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Hidden QR Section -->
+                    <div id="qr-wavepay" class="hidden flex-col items-center justify-center pt-6 pb-2 transition-all duration-300">
+                        <div class="p-3 bg-white rounded-2xl shadow-xl">
+                            <!-- Placeholder for QR Code -->
+                            <img src="Wavepay.jpg" alt="Wavepay QR Code" class="w-56 h-56 rounded-lg object-contain">
+                        </div>
+                        <div class="text-center mt-4 text-xs text-slate-400">Scan to support via WavePay</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Crypto Addresses -->
+            <div class="glass-card flex flex-col p-6 group card-hover-effect">
+                <div class="content-layer h-full flex flex-col">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-violet-500/10 text-violet-400 border border-violet-500/20">
+                            <i class="ph ph-currency-btc text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-medium text-white">Cryptocurrency</h2>
+                            <p class="text-sm text-slate-400">Global</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-grow flex flex-col justify-center space-y-3">
+                        
+                        <!-- BTC Row -->
+                        <div class="bg-slate-900/40 border border-white/5 rounded-xl p-3">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <span class="text-sm font-medium text-slate-200 flex items-center gap-2">
+                                    <i class="ph-fill ph-currency-btc text-[#F7931A] text-lg"></i> BTC
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="copyAddress(this, '16Aj6hvV4FCpvtcmpX7AT6VxKRLP2Y39DF')" class="glass-btn p-2 rounded-lg text-slate-300 hover:text-white outline-none flex items-center justify-center min-w-[36px]" title="Copy Address">
+                                        <i class="ph ph-copy text-base"></i>
+                                        <span class="text-xs hidden ml-1 font-medium">Copied!</span>
+                                    </button>
+                                    <button onclick="toggleQR('qr-btc', this)" class="glass-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white text-xs font-medium flex items-center gap-1.5 outline-none whitespace-nowrap">
+                                        <i class="ph ph-qr-code text-sm"></i> <span class="btn-text">Show QR</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Hidden QR -->
+                            <div id="qr-btc" class="hidden flex-col items-center justify-center mt-3 pt-3 border-t border-white/5">
+                                <div class="p-2 bg-white rounded-xl shadow-lg">
+                                    <img src="BTC.jpg" alt="BTC QR" class="w-56 h-56 rounded-lg object-contain">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- USDT Row -->
+                        <div class="bg-slate-900/40 border border-white/5 rounded-xl p-3">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <span class="text-sm font-medium text-slate-200 flex items-center gap-2">
+                                    <i class="ph-fill ph-coin text-[#26A17B] text-lg"></i> USDT
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="copyAddress(this, '0xec7b4ee66845bbfdfb3d24714d50008c67a95835')" class="glass-btn p-2 rounded-lg text-slate-300 hover:text-white outline-none flex items-center justify-center min-w-[36px]" title="Copy Address">
+                                        <i class="ph ph-copy text-base"></i>
+                                        <span class="text-xs hidden ml-1 font-medium">Copied!</span>
+                                    </button>
+                                    <button onclick="toggleQR('qr-usdt', this)" class="glass-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white text-xs font-medium flex items-center gap-1.5 outline-none whitespace-nowrap">
+                                        <i class="ph ph-qr-code text-sm"></i> <span class="btn-text">Show QR</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Hidden QR -->
+                            <div id="qr-usdt" class="hidden flex-col items-center justify-center mt-3 pt-3 border-t border-white/5">
+                                <div class="p-2 bg-white rounded-xl shadow-lg">
+                                    <img src="USDT.jpg" alt="USDT QR" class="w-56 h-56 rounded-lg object-contain">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SOL Row -->
+                        <div class="bg-slate-900/40 border border-white/5 rounded-xl p-3">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <span class="text-sm font-medium text-slate-200 flex items-center gap-2">
+                                    <i class="ph-fill ph-hexagon text-[#14F195] text-lg"></i> SOL
+                                </span>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="copyAddress(this, 'BzsesfWJukoNAgKW1R45hZdaabqPhZEiDSTRpQQZHjNS')" class="glass-btn p-2 rounded-lg text-slate-300 hover:text-white outline-none flex items-center justify-center min-w-[36px]" title="Copy Address">
+                                        <i class="ph ph-copy text-base"></i>
+                                        <span class="text-xs hidden ml-1 font-medium">Copied!</span>
+                                    </button>
+                                    <button onclick="toggleQR('qr-sol', this)" class="glass-btn px-3 py-2 rounded-lg text-slate-300 hover:text-white text-xs font-medium flex items-center gap-1.5 outline-none whitespace-nowrap">
+                                        <i class="ph ph-qr-code text-sm"></i> <span class="btn-text">Show QR</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Hidden QR -->
+                            <div id="qr-sol" class="hidden flex-col items-center justify-center mt-3 pt-3 border-t border-white/5">
+                                <div class="p-2 bg-white rounded-xl shadow-lg">
+                                    <img src="SOL.jpg" alt="SOL QR" class="w-56 h-56 rounded-lg object-contain">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="py-8 text-center text-slate-500 text-sm font-light">
+        <p>Made with care by Anxic</p>
+        <p class="mt-1 opacity-70">&copy; <span id="year"></span> Lecture AI. All rights reserved.</p>
+    </footer>
+
+    <!-- Textarea for clipboard fallback -->
+    <textarea id="dummy" class="copy-dummy"></textarea>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Hover glowing effect for glass cards based on mouse position
+        const cards = document.querySelectorAll('.card-hover-effect');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Toggle QR functionality
+        function toggleQR(qrId, btnElement) {
+            const qrContainer = document.getElementById(qrId);
+            const btnText = btnElement.querySelector('.btn-text');
+            
+            if (qrContainer.classList.contains('hidden')) {
+                qrContainer.classList.remove('hidden');
+                qrContainer.classList.add('flex');
+                btnText.textContent = 'Hide QR';
+                btnElement.classList.add('bg-white/10'); // Slight active state
+            } else {
+                qrContainer.classList.add('hidden');
+                qrContainer.classList.remove('flex');
+                btnText.textContent = 'Show QR';
+                btnElement.classList.remove('bg-white/10');
+            }
+        }
+
+        // Copy functionality with subtle visual feedback
+        function copyAddress(btnElement, textToCopy) {
+            const dummy = document.getElementById("dummy");
+            dummy.value = textToCopy;
+            dummy.select();
+            dummy.setSelectionRange(0, 99999); /* For mobile devices */
+            
+            try {
+                document.execCommand("copy");
+                
+                // Visual Feedback
+                const icon = btnElement.querySelector('i');
+                const span = btnElement.querySelector('span');
+                
+                // Hide icon, show text
+                icon.classList.add('hidden');
+                span.classList.remove('hidden');
+                btnElement.classList.add('bg-green-500/20', 'border-green-500/40', 'text-green-400');
+                btnElement.classList.remove('text-slate-300');
+                btnElement.classList.add('w-[84px]'); // fix width to prevent jumping
+
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    icon.classList.remove('hidden');
+                    span.classList.add('hidden');
+                    btnElement.classList.remove('bg-green-500/20', 'border-green-500/40', 'text-green-400', 'w-[84px]');
+                    btnElement.classList.add('text-slate-300');
+                }, 2000);
+
+            } catch (err) {
+                console.error('Oops, unable to copy', err);
+            }
+            
+            // Clear selection
+            window.getSelection().removeAllRanges();
+        }
+    </script>
+</body>
+</html>
